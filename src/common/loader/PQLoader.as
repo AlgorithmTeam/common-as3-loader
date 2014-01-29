@@ -77,6 +77,11 @@ package common.loader
         private var _completeMsg:RySignal = new RySignal;
 
         /**
+         * 加载器在缓存内的key
+         */
+        private var _cacheName:String;
+
+        /**
          * 构造
          */
         public function PQLoader( numConnection:int )
@@ -102,6 +107,15 @@ package common.loader
                 _loader.sName = name;
             }
             return _pqLoaders.get( name ) as PQLoader;
+        }
+
+        /**
+         * 销毁加载器实例
+         */
+        public function dispose( key:String = "" ):void
+        {
+            if ( key != "" ) _pqLoaders.remove( _cacheName );
+            else _pqLoaders.remove( key );
         }
 
         /**

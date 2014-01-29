@@ -52,6 +52,11 @@ package common.loader.item
 			_content = XML(_loader.data);
 			super.onCompleteHandler(e);
 		}
+
+        public function get xml():XML
+        {
+            return _content;
+        }
 		
 	}
 
