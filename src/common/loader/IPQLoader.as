@@ -13,15 +13,17 @@ package common.loader
 
         function getItem(key : String) : AbstractItem;
 
-        function start() : void;
+        function start() : IPQLoader;
 
-        function complete(value : Function) : void;
+        function dispose( key:String = "" ):void;
+
+        function complete(value : Function) : IPQLoader;
 
         function get bStart() : Boolean;
 
         function get nProgress() : Number;
 
-        function addProgressHandler(value : Function) : void;
+        function addProgressHandler(value : Function) : IPQLoader;
 
         function get iMaxConnections() : int;
 

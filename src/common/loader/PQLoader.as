@@ -173,7 +173,7 @@ package common.loader
         /**
          * 开始加载
          */
-        public function start():void
+        public function start():IPQLoader
         {
             _bStart = true;
             _iCurrentConnections = 0;
@@ -186,15 +186,18 @@ package common.loader
                 onProgressHandler();
             } );
             _progressTimer.start();
+
+            return this;
         }
 
         /**
          * 完成所有加载以后触发
          * @param value
          */
-        public function complete( value:Function ):void
+        public function complete( value:Function ):IPQLoader
         {
             _completeMsg.add( value, true );
+            return this;
         }
 
         /**
@@ -282,9 +285,10 @@ package common.loader
          * 侦听进度
          * @param    value
          */
-        public function addProgressHandler( value:Function ):void
+        public function addProgressHandler( value:Function ):IPQLoader
         {
             _progressHandler = value;
+            return this;
         }
 
         /**
