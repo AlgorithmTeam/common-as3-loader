@@ -89,7 +89,6 @@ package common.loader
             _nProgress = 0;
             _iMaxConnections = numConnection;
             _aItems = [];
-            _loadingQueue = new BinaryHeap_Max;
         }
 
         /**
@@ -123,6 +122,15 @@ package common.loader
          */
         public function initialize():PQLoader
         {
+            _iCurrentConnections = 0;
+            _loadingQueue = new BinaryHeap_Max;
+            _loadingQueue.buildMaxHeap( _aItems, "iPriority" );
+            _nProgress = 0;
+            _progressTimer = new Timer( 30 );
+            _progressTimer.addEventListener( TimerEvent.TIMER, function ( e:TimerEvent ):void
+            {
+                onProgressHandler();
+            } );
             start();
             return this;
         }
@@ -176,17 +184,8 @@ package common.loader
         public function start():IPQLoader
         {
             _bStart = true;
-            _iCurrentConnections = 0;
-            _loadingQueue.buildMaxHeap( _aItems, "iPriority" );
-            canLoadNext();
-            _nProgress = 0;
-            _progressTimer = new Timer( 30 );
-            _progressTimer.addEventListener( TimerEvent.TIMER, function ( e:TimerEvent ):void
-            {
-                onProgressHandler();
-            } );
             _progressTimer.start();
-
+            canLoadNext();
             return this;
         }
 
