@@ -97,7 +97,7 @@ package common.loader
          * @param    numConnection        进程数     默认3个进程同时加载
          * @return
          */
-        public static function getInstance( name:String = "default", numConnection:int = 3 ):PQLoader
+        public static function getInstance( name:String = "default", numConnection:int = 3 ):IPQLoader
         {
             if ( !_pqLoaders.containsKey( name ) )
             {
@@ -183,6 +183,10 @@ package common.loader
          */
         public function start():IPQLoader
         {
+            if ( _progressTimer == null )
+            {
+                initialize();
+            }
             _bStart = true;
             _progressTimer.start();
             canLoadNext();
