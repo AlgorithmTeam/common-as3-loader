@@ -256,7 +256,7 @@ package common.loader
         {
             if ( _iCurrentConnections < _iMaxConnections )
             {
-                if ( _loadingQueue.hasNext )
+                if ( !_loadingQueue.isDone() )
                 {
                     var _item:AbstractItem = _loadingQueue.extract() as AbstractItem;
                     loadNext( _item );
