@@ -5,8 +5,10 @@
  */
 package common.loader.item
 {
+    import flash.display.DisplayObject;
     import flash.display.Loader;
     import flash.display.LoaderInfo;
+    import flash.display.MovieClip;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
     import flash.events.ProgressEvent;
@@ -37,9 +39,19 @@ package common.loader.item
             super.onCompleteHandler( e );
         }
 
+        public function getMovieClip():MovieClip
+        {
+            return _loader.content as MovieClip;
+        }
+
+        public function getSWFDisplayContent():DisplayObject
+        {
+            return _loader.content;
+        }
+
         public function getDefinitionByName( name:String ):Class
         {
-            var loadInfo:LoaderInfo = _content;
+            var loadInfo:LoaderInfo = _loader.contentLoaderInfo;
             return loadInfo.applicationDomain.getDefinition( name ) as Class;
         }
     }
