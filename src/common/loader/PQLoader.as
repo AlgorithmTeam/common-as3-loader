@@ -7,6 +7,7 @@ package common.loader
 
     import common.data.structure.BinaryHeap_Max;
     import common.data.structure.HashMap;
+    import common.loader.events.LoaderEvent;
     import common.loader.item.AbstractItem;
     import common.signal.RySignal;
 
@@ -217,7 +218,7 @@ package common.loader
             {
                 _iCurrentConnections++;
                 item.load();
-                item.addEventListener( AbstractItem.ITEM_LOAD_COMPLETE, function ( e:Event ):void
+                item.addEventListener( LoaderEvent.LOAD_OVER, function ( e:LoaderEvent ):void
                 {
                     _iCurrentConnections--;
                     canLoadNext();
